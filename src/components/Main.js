@@ -2,7 +2,7 @@ import api from '../utils/Api'
 import React from 'react'
 import Card from './Card'
 
-export default function Main(props) {
+export default function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClickSetPopup, onCardClickShowPopup}) {
 
   const [userName, setUserName] = React.useState('Жак-Ив Кусто')
   const [userDescription, setUserDescription] = React.useState('Путешественник')
@@ -34,22 +34,29 @@ export default function Main(props) {
       <section className="profile">
         <div className="profile__avatar-profile">
           <div className="profile__avatar-wrapper">
-            <img src={userAvatar} alt="Аватар" className="profile__avatar" onClick={props.onEditAvatar} />
+            <img src={userAvatar} alt="Аватар" className="profile__avatar" onClick={onEditAvatar} />
           </div>
         </div>
-        <href className="profile__profile-info">
+        <div className="profile__profile-info">
           <div className="profile__title-container">
             <h1 className="profile__title">{userName}</h1> 
-            <button className="profile__edit-button" type="button" aria-label="Редактировать профиль" onClick={props.onEditProfile}></button>
+            <button className="profile__edit-button" type="button" aria-label="Редактировать профиль" onClick={onEditProfile}></button>
           </div>
           <p className="profile__subtitle">{userDescription}</p>
-        </href>
-        <button className="profile__add-button" type="button" aria-label="Добавить место" onClick={props.onAddPlace}></button>
+        </div>
+        <button className="profile__add-button" type="button" aria-label="Добавить место" onClick={onAddPlace}></button>
       </section>
 
       <section className="cards">
         {
-          cards.map((card) => (<Card key={card._id} name={card.name} link={card.link} likesNumber={card.likes.length} onCardClick={props.onCardClick} />))
+          cards.map((card) => (
+            <Card 
+              key={card._id} 
+              card = {card}
+              onCardClickSetPopup={onCardClickSetPopup}
+              onCardClickShowPopup={onCardClickShowPopup}
+            />
+          ))
         }
       </section>
     </main>

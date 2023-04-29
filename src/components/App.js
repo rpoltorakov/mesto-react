@@ -12,7 +12,8 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({isOpen: false, src: '#', name: '#'});
+  const [selectedCard, setSelectedCard] = React.useState({link: '#', name: ''});
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false)
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true)
@@ -23,9 +24,11 @@ function App() {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true)
   }
-  function handleCardClick(props) {
+  function handleCardClickShowPopup() {
+    setIsImagePopupOpen(true)
+  }
+  function handleCardClickSetCard(props) {
     setSelectedCard({
-      isOpen: true,
       link: props.link,
       name: props.name
     })
@@ -34,18 +37,20 @@ function App() {
     setIsEditProfilePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
     setIsAddPlacePopupOpen(false)
-    setSelectedCard({
-      isOpen: false,
-      link: '#',
-      name: ''
-    })
+    setIsImagePopupOpen(false)
   }
 
   return (
     <div className="page">
       <Header/>
 
-      <Main onCardClick={handleCardClick} onEditProfile={handleEditProfileClick} onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} />
+      <Main 
+        onEditProfile={handleEditProfileClick} 
+        onEditAvatar={handleEditAvatarClick} 
+        onAddPlace={handleAddPlaceClick} 
+        onCardClickSetPopup={handleCardClickSetCard} 
+        onCardClickShowPopup={handleCardClickShowPopup} 
+      />
     
       <Footer />
 
@@ -69,7 +74,7 @@ function App() {
           <span className="popup__input-error" id="editAvatar-error">Error</span>
       </PopupWithForm>
       
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} />
     </div>
   );
 }
