@@ -1,7 +1,7 @@
-export default function ImagePopup({isOpen, card, onClose}) {
+export default function ImagePopup({card, onClose}) {
 
   return (
-    <div className={`popup popup_target_image ${isOpen ? 'popup_opened' : ''}`}>
+    <div className={`popup popup_target_image ${card.link ? 'popup_opened' : ''}`}>
       <div className="popup__image-container">
         <img className="popup__image" src={card.link} alt={card.name}/>
         <p className="popup__subtitle">{card.name}</p>

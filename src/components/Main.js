@@ -2,7 +2,7 @@ import api from '../utils/Api'
 import React from 'react'
 import Card from './Card'
 
-export default function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClickSetPopup, onCardClickShowPopup}) {
+export default function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
   const [userName, setUserName] = React.useState('Жак-Ив Кусто')
   const [userDescription, setUserDescription] = React.useState('Путешественник')
@@ -53,8 +53,7 @@ export default function Main({onEditAvatar, onEditProfile, onAddPlace, onCardCli
             <Card 
               key={card._id} 
               card = {card}
-              onCardClickSetPopup={onCardClickSetPopup}
-              onCardClickShowPopup={onCardClickShowPopup}
+              onCardClick={onCardClick}
             />
           ))
         }

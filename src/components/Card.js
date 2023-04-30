@@ -1,10 +1,9 @@
 import deleteLogoPath from '../images/trash.svg'
 
-export default function Card({card, handleClick, onCardClickShowPopup, onCardClickSetPopup}) {
+export default function Card({card, onCardClick}) {
 
   function handleClick() {
-    onCardClickShowPopup(true)
-    onCardClickSetPopup({
+    onCardClick({
       link: card.link,
       name: card.name
     })
