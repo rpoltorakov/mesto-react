@@ -1,12 +1,23 @@
 import deleteLogoPath from '../images/trash.svg'
+import { CurrentUserContext } from '../contexts/CurrentUserContext'
+import React from 'react'
 
-export default function Card({card, onCardClick}) {
+export default function Card({card, onCardClick, onCardLike, onCardDelete}) {
+  const userContext = React.useContext(CurrentUserContext)
+  const isOwn = card.owner._id === userContext._id
+  const isLiked = card.likes.some(i => i._id === userContext._id);
 
   function handleClick() {
     onCardClick({
       link: card.link,
       name: card.name
     })
+  }
+  function handleLikeClick() {
+    onCardLike(card)
+  }
+  function handleDeleteClick() {
+    onCardDelete(card)
   }
 
   return (
@@ -15,11 +26,16 @@ export default function Card({card, onCardClick}) {
       <div className="card__title">
         <h3 className="card__title-text">{card.name}</h3>
         <div className="card__like-container">
-          <button className="card__like-button" type="button" aria-label="Лайк"></button>
+          <button 
+            className={`card__like-button ${isLiked && 'card__like-button_pressed'}`} 
+            type="button" 
+            aria-label="Лайк" 
+            onClick={handleLikeClick}
+            ></button>
           <p className="card__likes">{card.likes.length}</p>
         </div>
       </div>
-      <img src={deleteLogoPath} alt="Удалить" className="card__delete-button" />
+      {isOwn && <img src={deleteLogoPath} alt="Удалить" className="card__delete-button" onClick={handleDeleteClick} />}
     </div>
   )
 }
