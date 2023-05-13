@@ -12,7 +12,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
       link: linkRef.current.value
     })
   }
-  
+
   return ( 
     <PopupWithForm 
       target="addPlace" 
