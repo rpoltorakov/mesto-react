@@ -7,8 +7,7 @@ export default function PopupWithForm({isOpen, onClose, target, title, children,
         <h2 className="popup__header">{title}</h2>
         <form
           className={`popup__form popup__form_target_${target}`} 
-          name={target} 
-          // noValidate
+          name={target}
           onSubmit={onSubmit}
           >
           {children}
